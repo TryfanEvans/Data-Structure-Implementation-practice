@@ -20,25 +20,35 @@ class Graph
 {
 public:
     bool directed;
+    int nvertices = 0;
     std::vector<Node<T>> adjacency_list;
 
-    Graph(bool directed) : directed(directed)
+    Graph(bool directed, int nvertices) : directed(directed), nvertices(nvertices)
     {
+        Node<T> node;
+        for (int i = 0; i < nvertices; i++)
+        {
+            adjacency_list.push_back(node);
+        }
+        this->nvertices = 0;
     }
 
     void insertNode(std::vector<Edge> edges, T value)
     {
-        Node<T> node;
+        Node<T> *node = &adjacency_list[nvertices];
         for (int i = 0; i < edges.size(); i++)
         {
-            node.edges.push_back(edges[i]);
-            // if (!directed)
-            // {
-            // adjacency_list[edges[i].node_index].edges.push_back({adjacency_list.size(), edges[i].weight})
-            // }
+            node->edges.push_back(edges[i]);
+            if (!directed)
+            {
+                Node<T> *target_node = &adjacency_list[edges[i].node_index];
+                Edge reverse_edge = {nvertices, edges[i].weight};
+                target_node->edges.push_back(reverse_edge);
+            }
         }
-        node.value = value;
-        adjacency_list.push_back(node);
+        node->value = value;
+
+        nvertices++;
     }
 
     void print()
@@ -52,10 +62,10 @@ public:
 
 void test_graph_using_adjacency_list()
 {
-    Graph<int> graph(false);
-    graph.insertNode({{4, 3}, {2, 1}}, 6);
-    graph.insertNode({{4, 3}, {3, 1}}, 4);
-    graph.insertNode({{4, 3}, {1, 1}}, 2);
+    Graph<int> graph(false, 4);
+    graph.insertNode({{3, 3}, {2, 1}}, 6);
+    graph.insertNode({{3, 3}, {0, 1}}, 4);
+    graph.insertNode({{3, 3}, {1, 1}}, 2);
     graph.insertNode({{2, 3}, {2, 1}}, 3);
     graph.print();
 }
