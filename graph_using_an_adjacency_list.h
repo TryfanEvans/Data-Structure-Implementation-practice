@@ -32,10 +32,6 @@ public:
         for (int i = 0; i < edges.size(); i++)
         {
             node.edges.push_back(edges[i]);
-            if (!directed)
-            {
-                adjacency_list[edges[i].node_index].edges.push_back({adjacency_list.size(), edges[i].weight})
-            }
         }
         node.value = value;
         adjacency_list.push_back(node);
