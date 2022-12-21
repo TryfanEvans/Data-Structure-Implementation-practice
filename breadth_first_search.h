@@ -79,14 +79,14 @@ void traverse_tree(std::vector<Vertex> tree, int end_label)
 
 void test_breadth_first_search()
 {
-    Graph<int> graph(true, 6);
+    Graph<int> graph(false, 6);
 
-    graph.insertNode({{3, 3}, {2, 1}, {5, 1}}, 6);
-    graph.insertNode({{1, 3}, {4, 1}, {0, 1}}, 4);
-    graph.insertNode({{5, 3}, {1, 1}, {0, 1}}, 2);
-    graph.insertNode({{2, 4}, {3, 1}, {0, 1}}, 3);
-    graph.insertNode({{5, 5}, {2, 1}, {0, 1}}, 3);
-    graph.insertNode({{4, 4}, {2, 1}, {0, 1}}, 3);
+    graph.insertNode({{3, 3}, {2, 1}}, 6);
+    graph.insertNode({{1, 3}, {4, 1}}, 4);
+    graph.insertNode({{5, 3}, {1, 1}}, 2);
+    graph.insertNode({{2, 4}, {3, 1}}, 3);
+    graph.insertNode({{5, 5}, {2, 1}}, 3);
+    graph.insertNode({{4, 4}, {2, 1}}, 3);
     std::vector<Vertex> tree = bfs(graph, 1);
     traverse_tree(tree, 3);
     std::cout << "This is the breadth first search test!" << std::endl;

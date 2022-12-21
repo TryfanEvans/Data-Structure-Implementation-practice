@@ -10,6 +10,6 @@ int main()
     std::cout << "Hello World!" << std::endl;
     // test_linked_list();
     // test_binary_tree();
-    test_breadth_first_search();
+    test_depth_first_search();
     return 0;
 }
