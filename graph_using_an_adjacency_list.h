@@ -3,7 +3,7 @@
 
 struct Edge
 {
-    int node_index;
+    int target_label;
     int weight;
 };
 
@@ -11,6 +11,7 @@ template <typename T>
 class Node
 {
 public:
+    int label;
     std::vector<Edge> edges;
     T value;
 };
@@ -41,13 +42,13 @@ public:
             node->edges.push_back(edges[i]);
             if (!directed)
             {
-                Node<T> *target_node = &adjacency_list[edges[i].node_index];
+                Node<T> *target_node = &adjacency_list[edges[i].target_label];
                 Edge reverse_edge = {nvertices, edges[i].weight};
                 target_node->edges.push_back(reverse_edge);
             }
         }
         node->value = value;
-
+        node->label = nvertices;
         nvertices++;
     }
 
